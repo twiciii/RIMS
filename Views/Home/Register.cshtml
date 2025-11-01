@@ -1,0 +1,103 @@
+﻿@{
+    ViewData["Title"] = "Create Account";
+}
+
+<div class="register-container">
+    <h3 class="text-center mb-4" style="color:#ADCB7B;">Create an Account</h3>
+
+    <form>
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="ex. Jane" required>
+                <small>First Name</small>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="ex. Marie">
+                <small>Middle Name (Optional)</small>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="ex. Doe" required>
+                <small>Last Name</small>
+            </div>
+            <div class="col-md-3">
+                <input type="text" class="form-control" placeholder="ex. Jr.">
+                <small>Suffix (Optional)</small>
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <input type="email" class="form-control" placeholder="ex. janedoe@gmail.com" required>
+                <small>Email</small>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option selected disabled>ex. ADMIN</option>
+                    <option>ADMIN</option>
+                    <option>STAFF</option>
+                    <option>USER</option>
+                </select>
+                <small>Department</small>
+            </div>
+            <div class="col-md-4">
+                <select class="form-select">
+                    <option selected disabled>ex. Executive Secretary</option>
+                    <option>Executive Secretary</option>
+                    <option>Manager</option>
+                    <option>Resident</option>
+                </select>
+                <small>Position</small>
+            </div>
+        </div>
+
+        <div class="row mb-4">
+            <div class="col-md-6 position-relative">
+                <input type="password" class="form-control" id="regPassword" placeholder="********" required>
+                <small>Password</small>
+                <i class="bi bi-eye-fill" id="toggleRegPassword"
+                   style="position:absolute; right:20px; top:7px; cursor:pointer; color:gray; font-size:1.2rem;"></i>
+            </div>
+            <div class="col-md-6 position-relative">
+                <input type="password" class="form-control" id="regConfirmPassword" placeholder="********" required>
+                <small>Confirm Password</small>
+                <i class="bi bi-eye-fill" id="toggleRegConfirmPassword"
+                   style="position:absolute; right:20px; top:7px; cursor:pointer; color:gray; font-size:1.2rem;"></i>
+            </div>
+        </div>
+        <div class="form-check mt-3">
+            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+            <label class="form-check-label" for="agreeTerms">
+                <a>I have read the </a><a asp-controller="Home" asp-action="TermsandCondition" target="_blank" style="color:#0E4732;">Terms and Conditions</a>
+            </label>
+        </div>
+
+
+        <button type="submit" class="btn btn-success w-100" ">Sign Up</button>
+
+        <p class="text-center mt-3">
+            Have an account already?
+            <a href="/Home/Index" style="color:#0E4732;">Log In</a>
+        </p>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function setupToggle(toggleId, inputId) {
+            const toggle = document.getElementById(toggleId);
+            const input = document.getElementById(inputId);
+
+            if (toggle && input) {
+                toggle.addEventListener('click', function () {
+                    const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+                    input.setAttribute('type', type);
+                    this.classList.toggle('bi-eye');
+                    this.classList.toggle('bi-eye-fill');
+                });
+            }
+        }
+
+        setupToggle('toggleRegPassword', 'regPassword');
+        setupToggle('toggleRegConfirmPassword', 'regConfirmPassword');
+    });
+</script>

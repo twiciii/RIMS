@@ -1,0 +1,60 @@
+﻿@{
+    ViewData["Title"] = "Terms and Conditions";
+}
+
+<div class="terms-container">
+    <h3 class="text-center mb-4" style="color:#4F7942;">Terms and Conditions</h3>
+
+    <div class="terms-content" style="max-height: 320px; overflow-y: auto; padding: 20px; background: rgba(255,255,255,0.9); border-radius: 10px;">
+        <h5>1. Acceptance and Scope</h5>
+        <p>
+            By logging into, accessing, or using the <b>Resident Information Management System</b>, you, the Barangay Personnel,
+            are entering into a legally binding agreement and are consenting to be bound by these Terms and Conditions, Barangay
+            San Bartolome’s Security Policy, and Privacy Policy. Your use is strictly conditional upon your employment or contractual
+            relationship with the Barangay. If you do not agree, you must exit immediately and not access the System.
+        </p>
+
+        <h5>2. User Authorization and Responsibility</h5>
+        <ul>
+            <li><b>Authorized Use Only:</b> Access is granted to you solely for the performance of your official duties as assigned by the Barangay. You are only authorized to access the specific data and functions necessary for those duties.</li>
+            <li><b>Confidentiality and Credentials:</b> You are responsible for protecting the confidentiality and security of your login credentials (email and password). You must never share your access credentials with any other individual, including colleagues or supervisors.</li>
+            <li><b>Prompt Logging Off:</b> You must log off the System at the end of your work session and whenever your workstation is left unattended.</li>
+            <li><b>Termination of Access:</b> Your access to the System will be immediately revoked upon the termination of your employment or contract with the Barangay.</li>
+        </ul>
+
+        <h5>3. Data Security and Privacy Compliance</h5>
+        <ul>
+            <li><b>Handling of Sensitive Data:</b> The System contains highly sensitive Resident Personal Information (PI) and Personally Identifiable Information (PII). You must handle all data in strict compliance with the Barangay’s policies, all applicable federal, state, and local privacy laws.</li>
+            <li><b>"Need to Know" Basis:</b> You may only access, process, or disclose resident information on a strict "need to know" basis for legitimate, work-related purposes. Any access outside of your required duties is a violation of these terms.</li>
+            <li><b>No Unauthorized Copying/Exporting:</b> You are prohibited from copying, exporting, downloading, or printing resident data from the System, except as explicitly required and authorized for your official duties. Any authorized data export must be handled using approved, secured methods.</li>
+            <li><b>Reporting Security Incidents:</b> You must immediately report any suspected or actual data breach, security incident, or unauthorized data access to your superior and the Barangay’s authorized personnel.</li>
+        </ul>
+
+        <h5>4. Prohibited System Activities</h5>
+        <ul>
+            <li><b>Unauthorized Access:</b> Attempting to access data or functions beyond your authorized permissions, including using another Official's credentials.</li>
+            <li><b>Data Tampering:</b> Altering, deleting, adding, or corrupting resident data in any way that is not an authorized function of your job role.</li>
+            <li><b>System Disruption:</b> Introducing any viruses, malware, or destructive code, or otherwise attempting to compromise the security, integrity, or performance of the System.</li>
+            <li><b>Personal Use:</b> Using the System for personal business, communication, or any purpose unrelated to your official duties.</li>
+        </ul>
+
+        <h5>5. Monitoring and Auditing</h5>
+        <p>
+            <b>No Expectation of Privacy:</b> You have no expectation of privacy regarding any data entered into or accessed from the System. This monitoring may occur without further notice.
+        </p>
+
+        <h5>6. Consequences of Violation</h5>
+        <p>
+            Any violation of these Terms and Conditions, the Barangay’s Security Policy, or any applicable privacy law may result in:
+        </p>
+        <ul>
+            <li>Immediate revocation of your System access.</li>
+            <li>Disciplinary action, up to and including termination of employment or contract.</li>
+            <li>Civil or criminal legal action, as determined by the severity of the violation and any resulting damages.</li>
+        </ul>
+    </div>
+
+    <div style="text-align: right; margin-top: 15px;">
+        <a asp-controller="Home" asp-action="Register" class="btn btn-success">I Agree</a>
+    </div>
+</div>

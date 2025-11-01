@@ -1,0 +1,92 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-container">
+    <h3 class="text-center mb-4" style="color:#ADCB7B;">Log In</h3>
+
+    <form>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" placeholder="Enter email" required>
+        </div>
+
+        <div class="mb-3 position-relative">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" class="form-control" id="loginPassword" placeholder="Enter password" required>
+            <i class="bi bi-eye-fill" id="toggleLoginPassword"
+               style="position:absolute; right:15px; top:38px; cursor:pointer; color:gray; font-size:1.2rem;"></i>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="remember">
+            <label class="form-check-label" for="remember">Remember me</label>
+            <a href="#" class="float-end" style="color:#0E4732;" data-bs-toggle="modal" data-bs-target="#passwordResetModal">
+                Forgot Password?
+            </a>
+        </div>
+
+        <div class="modal fade" id="passwordResetModal" tabindex="-1" aria-labelledby="passwordResetLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content" style="border-radius:15px;">
+                    <div class="modal-header" style="background-color:#9CCC65; border-top-left-radius:15px; border-top-right-radius:15px;">
+                        <h6 class="modal-title text-white" id="passwordResetLabel">Password Reset</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+
+                    <div class="modal-body text-center">
+                        <h6 class="fw-bold mb-3">Are you sure you want to reset your account password?</h6>
+                        <p style="font-size: 14px; color: #555;">
+                            Resetting your password will erase your credentials from the server.
+                            Begin the reset process by entering your email below.
+                        </p>
+
+                        <input type="email" class="form-control mt-3 mb-3" id="resetEmail" placeholder="Enter Email" required>
+
+                        <div class="d-flex justify-content-end">
+                            <button type="button" class="btn btn-secondary me-2" data-bs-dismiss="modal">Cancel</button>
+                            <button type="button" class="btn btn-success" id="continueReset">Continue</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">LOG IN</button>
+        <p class="text-center mt-3">
+            Don’t have an account?
+            <a asp-controller="Home" asp-action="Register" style="color:#0E4732;">Sign Up</a>
+        </p>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggleLoginPassword = document.getElementById('toggleLoginPassword');
+        const loginPassword = document.getElementById('loginPassword');
+
+        toggleLoginPassword.addEventListener('click', function () {
+            const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+            loginPassword.setAttribute('type', type);
+            this.classList.toggle('bi-eye');
+            this.classList.toggle('bi-eye-fill');
+        });
+    });
+
+    document.getElementById("continueReset").addEventListener("click", function () {
+        const email = document.getElementById("resetEmail").value.trim();
+
+        if (email === "") {
+            alert("Please enter your email.");
+            return;
+        }
+
+        // Close the modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('passwordResetModal'));
+        modal.hide();
+
+        // Redirect to Reset Password page
+        window.location.href = "/Home/ResetPassword";
+    });
+</script>
+

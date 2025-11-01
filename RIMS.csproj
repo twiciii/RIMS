@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="C:\RIMS\HomeController.cs" Link="HomeController.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="C:\RIMS\Index.cshtml" Link="Index.cshtml" />
+    <Content Include="C:\RIMS\Register.cshtml" Link="Register.cshtml" />
+    <Content Include="C:\RIMS\Resetpassword.cshtml" Link="Resetpassword.cshtml" />
+    <Content Include="C:\RIMS\site.css" Link="site.css" />
+    <Content Include="C:\RIMS\site.js" Link="site.js" />
+    <Content Include="C:\RIMS\TermsandCondition.cshtml" Link="TermsandCondition.cshtml" />
+    <Content Include="C:\RIMS\_Layout.cshtml" Link="_Layout.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+  </ItemGroup>
+
+</Project>

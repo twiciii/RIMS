@@ -1,0 +1,139 @@
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+}
+
+.background {
+    background: url('/images/background.png') no-repeat center center fixed;
+    background-size: cover;
+    filter: blur(6px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+}
+
+.header-top {
+    background-color: #f5f2e9;
+    border-bottom: 2px solid #a6d7a6;
+}
+
+.navbar-logo {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+}
+
+.date-bar {
+    background-color: #90ee90;
+    color: #ffffff;
+    font-weight: 500;
+    padding: 6px 0;
+    font-size: 14px;
+    border-bottom: 1px solid #1f7d1f;
+}
+
+.login-container {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: 25px auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.register-container {
+    background: rgba(255, 255, 255, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+
+    .register-container input,
+    .register-container select {
+        background-color: #F2F8E7;
+    }
+
+    .register-container small {
+        color: #6c757d;
+    }
+.terms-container {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 900px;
+    margin: 40px auto;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+}
+.reset-container {
+    background: #fff;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 400px;
+    margin: 80px auto;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.alert {
+    border-radius: 10px;
+    font-weight: 500;
+}
+
+
+.password-container {
+    position: relative;
+}
+
+    .password-container .toggle-password {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: pointer;
+        color: #888;
+    }
+
+
+.signup-btn {
+    color: white;
+    border: none;
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+    .signup-btn:hover {
+        background-color: #3e6536;
+    }
+
+
+.register-container .btn-success {
+    background-color: #4F7942;
+    border-color: #4F7942;
+}
+
+.btn-success {
+    background-color: #4F7942;
+    border-color: #4F7942;
+}
+
+    .btn-success:hover {
+        background-color: #6aad6a;
+    }
+
+
+.footer {
+    position: fixed;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    color: #777;
+    font-size: 14px;
+}
