@@ -40,7 +40,6 @@
                             Resetting your password will erase your credentials from the server.
                             Begin the reset process by entering your email below.
                         </p>
-
                         <input type="email" class="form-control mt-3 mb-3" id="resetEmail" placeholder="Enter Email" required>
 
                         <div class="d-flex justify-content-end">
@@ -71,22 +70,31 @@
             this.classList.toggle('bi-eye');
             this.classList.toggle('bi-eye-fill');
         });
-    });
 
-    document.getElementById("continueReset").addEventListener("click", function () {
-        const email = document.getElementById("resetEmail").value.trim();
+        const continueResetBtn = document.getElementById("continueReset");
+        const emailInput = document.getElementById("resetEmail");
 
-        if (email === "") {
-            alert("Please enter your email.");
-            return;
-        }
+        continueResetBtn.addEventListener("click", function () {
+            const email = emailInput.value.trim();
 
-        // Close the modal
-        const modal = bootstrap.Modal.getInstance(document.getElementById('passwordResetModal'));
-        modal.hide();
+            if (email === "") {
+                alert("Please enter your email.");
+                return;
+            }
 
-        // Redirect to Reset Password page
-        window.location.href = "/Home/ResetPassword";
+            // Use HTML5 validation to check email format
+            if (!emailInput.checkValidity()) {
+                alert("Please enter a valid email address.");
+                return;
+            }
+
+            // Close the modal (safely get or create the Bootstrap modal instance)
+            const modalEl = document.getElementById('passwordResetModal');
+            const modal = bootstrap.Modal.getInstance(modalEl) || new bootstrap.Modal(modalEl);
+            modal.hide();
+
+            // Redirect to Reset Password page
+            window.location.href = "/Home/ResetPassword";
+        });
     });
 </script>
-

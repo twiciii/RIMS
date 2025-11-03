@@ -10,7 +10,7 @@ namespace RIMS.Controllers
 
         public HomeController(ILogger<HomeController> logger)
         {
-            _logger = logger;
+            logger = logger;
         }
 
         public IActionResult Index()
@@ -31,6 +31,11 @@ namespace RIMS.Controllers
         }
 
         public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        public IActionResult OfficialDocuments()
         {
             return View();
         }

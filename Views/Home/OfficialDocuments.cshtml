@@ -1,0 +1,682 @@
+﻿@{
+    ViewData["Title"] = "Official Documents";
+}
+
+<link rel="stylesheet" href="~/css/officialdocument.css" asp-append-version="true" />
+
+<div class="docs-container">
+    <!-- Navigation Tabs -->
+    <ul class="nav nav-tabs" id="docsTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button" role="tab" aria-controls="overview" aria-selected="true">Overview</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="residents-tab" data-bs-toggle="tab" data-bs-target="#residents" type="button" role="tab" aria-controls="residents" aria-selected="false">Residents</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="documents-tab" data-bs-toggle="tab" data-bs-target="#documents" type="button" role="tab" aria-controls="documents" aria-selected="false">Official Documents</button>
+        </li>
+    </ul>
+
+    <!-- Tab Content -->
+    <div class="tab-content" id="docsTabContent">
+        <!-- Overview Tab -->
+        <div class="tab-pane fade show active" id="overview" role="tabpanel" aria-labelledby="overview-tab">
+            <div class="overview-scroll">
+                <h4 class="mb-4">Overview</h4>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-2" style="font-size: 13px;">Total Residents</h6>
+                                <h2 class="mb-0 fw-bold" style="color: #2d5016;">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-2" style="font-size: 13px;">Total Households</h6>
+                                <h2 class="mb-0 fw-bold" style="color: #2d5016;">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="text-muted mb-2" style="font-size: 13px;">Total Assistance Distributed</h6>
+                                <h2 class="mb-0 fw-bold" style="color: #2d5016;">0</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row g-3 mb-4">
+                    <div class="col-md-5">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="mb-3" style="font-size: 13px; color: #666;">Total Resident by Purok Chart</h6>
+                                <canvas id="purokChart" style="max-height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card border-0 shadow-sm h-100">
+                            <div class="card-body">
+                                <h6 class="mb-3" style="font-size: 13px; color: #666;">Annual New Resident Enrollment Trend</h6>
+                                <canvas id="trendChart" style="max-height: 250px;"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+ 
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h6 class="mb-3" style="font-size: 13px; color: #666;">Recently Added Residents</h6>
+                        <div class="table-responsive">
+                            <table class="table table-sm table-hover align-middle mb-0">
+                                <thead style="background-color: #f8f9fa;">
+                                    <tr>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Full Name</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Sex</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Date of Birth</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Civil Status</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Contact No</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Address</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Purok</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Occupation</th>
+                                        <th style="font-size: 12px; font-weight: 600; color: #666;">Category</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="font-size: 13px;">John Doe</td>
+                                        <td style="font-size: 13px;">Male</td>
+                                        <td style="font-size: 13px;">12-25-99</td>
+                                        <td style="font-size: 13px;">Married</td>
+                                        <td style="font-size: 13px;">09250037971</td>
+                                        <td style="font-size: 13px;">Roselle Blo...</td>
+                                        <td style="font-size: 13px;">1</td>
+                                        <td style="font-size: 13px;">Call Center...</td>
+                                        <td style="font-size: 13px;">Solo</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Residents Tab -->
+        <div class="tab-pane fade" id="residents" role="tabpanel" aria-labelledby="residents-tab">
+            <h4 class="mb-3">Residents Profile Log</h4>
+
+
+            <div class="search-container mb-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control search-input border-start-0" placeholder="Search..." id="residentsSearchInput">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-sm docs-table">
+                    <thead>
+                        <tr>
+                            <th>Lastname</th>
+                            <th>Sex</th>
+                            <th>Date of Birth</th>
+                            <th>Civil Status</th>
+                            <th>Contact No</th>
+                            <th>Address</th>
+                            <th>Documents</th>
+                            <th>Status For</th>
+                            <th style="width: 100px; text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="residentsTableBody">
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Male</td>
+                            <td>01-18-89</td>
+                            <td>Married</td>
+                            <td>09250037971</td>
+                            <td>Roselle Blo...</td>
+                            <td>Card Carrier</td>
+                            <td><span class="status-badge status-issued">Update Status</span></td>
+                            <td class="text-center">
+                                <div class="action-icons">
+                                    <i class="bi bi-eye" title="View" data-resident="Jane Doe"></i>
+                                    <i class="bi bi-check-circle" title="Verify" data-resident="Jane Doe"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>John Doe</td>
+                            <td>Male</td>
+                            <td>12-25-99</td>
+                            <td>Married</td>
+                            <td>09250037971</td>
+                            <td>Roselle Blo...</td>
+                            <td>Card Carrier</td>
+                            <td><span class="status-badge status-pending">Update Status</span></td>
+                            <td class="text-center">
+                                <div class="action-icons">
+                                    <i class="bi bi-eye" title="View" data-resident="John Doe"></i>
+                                    <i class="bi bi-check-circle" title="Verify" data-resident="John Doe"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Jane Doe</td>
+                            <td>Male</td>
+                            <td>01-18-89</td>
+                            <td>Married</td>
+                            <td>09250037971</td>
+                            <td>Roselle Blo...</td>
+                            <td>Card Carrier</td>
+                            <td><span class="status-badge status-issued">Update Status</span></td>
+                            <td class="text-center">
+                                <div class="action-icons">
+                                    <i class="bi bi-eye" title="View" data-resident="Jane Doe"></i>
+                                    <i class="bi bi-check-circle" title="Verify" data-resident="Jane Doe"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Official Documents Tab -->
+        <div class="tab-pane fade" id="documents" role="tabpanel" aria-labelledby="documents-tab">
+            <h4 class="mb-3">Official Documents Log</h4>
+
+            <div class="search-container mb-3">
+                <div class="input-group">
+                    <span class="input-group-text bg-white border-end-0">
+                        <i class="bi bi-search"></i>
+                    </span>
+                    <input type="text" class="form-control search-input border-start-0" placeholder="Search..." id="searchInput">
+                </div>
+            </div>
+
+            <div class="table-container">
+                <table class="table table-sm docs-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">ID</th>
+                            <th>Name</th>
+                            <th>Date Requested</th>
+                            <th>Issuance Date</th>
+                            <th>Document Type</th>
+                            <th>Department</th>
+                            <th>Issued By</th>
+                            <th>Purpose</th>
+                            <th style="width: 100px; text-align: center;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="documentsTableBody">
+                        <tr>
+                            <td>01</td>
+                            <td>Jane Doe</td>
+                            <td>08-25-25</td>
+                            <td>08-26-25</td>
+                            <td>Brgy. Clearance</td>
+                            <td class="dept-admin">ADMIN</td>
+                            <td>Sec. Brigs Moe</td>
+                            <td><span class="status-badge status-issued">Barangay Requirement</span></td>
+                            <td class="text-center">
+                                <div class="action-icons">
+                                    <i class="bi bi-eye" title="View"></i>
+                                    <i class="bi bi-check-circle" title="Approve"></i>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>02</td>
+                            <td>John Doe</td>
+                            <td>09-25-25</td>
+                            <td>09-26-25</td>
+                            <td>Cert. of Indigency</td>
+                            <td class="dept-admin">ADMIN</td>
+                            <td>Sec. Brigs Moe</td>
+                            <td><span class="status-badge status-pending">Financial Aid</span></td>
+                            <td class="text-center">
+                                <div class="action-icons">
+                                    <i class="bi bi-eye" title="View"></i>
+                                    <i class="bi bi-check-circle" title="Approve"></i>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // ==================== CHARTS ====================
+        const purokCtx = document.getElementById('purokChart');
+        if (purokCtx) {
+            new Chart(purokCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Purok 1', 'Purok 2', 'Purok 3'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: [
+                            '#6B8E23',
+                            '#90EE90',
+                            '#C8E6C9'
+                        ],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                font: {
+                                    size: 11
+                                },
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        const trendCtx = document.getElementById('trendChart');
+        if (trendCtx) {
+            new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: ['2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024', '2025'],
+                    datasets: [{
+                        label: 'New Residents',
+                        data: [100, 150, 250, 300, 500, 650, 600, 450, 350, 400],
+                        fill: true,
+                        backgroundColor: 'rgba(144, 238, 144, 0.3)',
+                        borderColor: '#6B8E23',
+                        borderWidth: 2,
+                        tension: 0.4,
+                        pointRadius: 0,
+                        pointHoverRadius: 5,
+                        pointBackgroundColor: '#6B8E23'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 700,
+                            ticks: {
+                                stepSize: 100,
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: {
+                                    size: 10
+                                }
+                            },
+                            grid: {
+                                display: false
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        // ==================== TABLE SEARCH - DOCUMENTS ====================
+        const searchInput = document.getElementById('searchInput');
+        const tableBody = document.getElementById('documentsTableBody');
+        if (searchInput && tableBody) {
+            searchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const rows = tableBody.getElementsByTagName('tr');
+                Array.from(rows).forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(searchTerm) ? '' : 'none';
+                });
+            });
+        }
+
+        // ==================== TABLE SEARCH - RESIDENTS ====================
+        const residentsSearchInput = document.getElementById('residentsSearchInput');
+        const residentsTableBody = document.getElementById('residentsTableBody');
+        if (residentsSearchInput && residentsTableBody) {
+            residentsSearchInput.addEventListener('input', function () {
+                const searchTerm = this.value.toLowerCase();
+                const rows = residentsTableBody.getElementsByTagName('tr');
+                Array.from(rows).forEach(row => {
+                    const text = row.textContent.toLowerCase();
+                    row.style.display = text.includes(searchTerm) ? '' : 'none';
+                });
+            });
+        }
+
+        // ==================== ACTION ICONS ====================
+        document.addEventListener('click', function (e) {
+            if (e.target.classList.contains('bi-eye') && e.target.closest('#documentsTableBody')) {
+                const row = e.target.closest('tr');
+                const name = row.cells[1].textContent;
+                const docType = row.cells[4].textContent;
+                showDocumentModal(name, docType);
+            }
+
+            if (e.target.classList.contains('bi-check-circle') && e.target.closest('#documentsTableBody')) {
+                const row = e.target.closest('tr');
+                const name = row.cells[1].textContent;
+                if (confirm(`Approve document for: ${name}?`)) {
+                    alert('Document approved successfully!');
+                }
+            }
+
+            if (e.target.classList.contains('bi-eye') && e.target.closest('#residentsTableBody')) {
+                const residentName = e.target.getAttribute('data-resident');
+                alert(`View profile for: ${residentName}`);
+            }
+
+            if (e.target.classList.contains('bi-check-circle') && e.target.closest('#residentsTableBody')) {
+                const residentName = e.target.getAttribute('data-resident');
+                showResidentVerifyModal(residentName);
+            }
+
+            if (e.target.closest && e.target.closest('#savePdfBtn')) {
+                e.stopPropagation();
+                saveDocumentAsPdf();
+            }
+
+            if (e.target.id === 'closeVerifyBtn') {
+                closeResidentVerifyModal();
+            }
+
+            if (e.target.id === 'closeModal' || e.target.id === 'documentModal') {
+                closeDocumentModal();
+            }
+            if (e.target.id === 'closeResidentModal' || e.target.id === 'residentVerifyModal') {
+                closeResidentVerifyModal();
+            }
+        });
+
+
+        function showDocumentModal(name, docType) {
+            let modal = document.getElementById('documentModal');
+            if (!modal) {
+                modal = createDocumentModal();
+                document.body.appendChild(modal);
+            }
+            document.getElementById('residentName').textContent = name;
+            document.getElementById('documentType').textContent = docType;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeDocumentModal() {
+            const modal = document.getElementById('documentModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function createDocumentModal() {
+            const modal = document.createElement('div');
+            modal.id = 'documentModal';
+            modal.className = 'document-modal';
+            modal.style.display = 'none';
+            modal.innerHTML = `
+                <div class="modal-content-doc">
+                    <button class="close-modal" id="closeModal" aria-label="Close">&times;</button>
+
+                    <div class="modal-header-doc">
+                        <img src="/images/Logo.png" alt="Barangay Logo" class="modal-logo">
+                        <div class="modal-header-text">
+                            <p class="modal-republic">Republic of the Philippines</p>
+                            <h5 class="modal-brgy-name">BARANGAY SAN BARTOLOME</h5>
+                            <p class="modal-address">Novaliches, Quezon City, Metro Manila</p>
+                            <p class="modal-office">Office of the Barangay Captain</p>
+                        </div>
+                    </div>
+
+                    <h3 class="modal-doc-title"><span id="documentType">BARANGAY CLEARANCE</span></h3>
+
+                    <div class="modal-body-doc">
+                        <p class="modal-intro"><strong>TO WHOM IT MAY CONCERN:</strong></p>
+
+                        <p class="modal-text">
+                            THIS IS TO CERTIFY that <strong><span id="residentName">JUAN DELA CRUZ</span></strong>, of legal age, married,
+                            Filipino Citizen and whose signature and thumbmark appears below
+                            is a resident of <strong>BLOCK 1 LOT 2, SINIFOROSA STREET, BARANGAY SAN
+                            BARTOLOME, QUEZON CITY</strong>.
+                        </p>
+
+                        <p class="modal-text">
+                            This CERTIFICATION is being issued upon the request of the above-named
+                            person for whatever legal purposes it may serve.
+                        </p>
+
+                        <p class="modal-text">
+                            Issued this <strong>25th of September, 2025</strong> at Barangay San Bartolome,
+                            Novaliches, Quezon City.
+                        </p>
+
+                        <div class="signature-section">
+                            <div class="signature-box">
+                                <div class="signature-placeholder">Right Thumbmark</div>
+                            </div>
+                            <div class="signature-line">
+                                <p class="signature-label">Signature</p>
+                            </div>
+                            <div class="signature-line">
+                                <p class="signature-label">Barangay Captain</p>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer-doc">
+                            <button class="btn btn-success" type="button" id="savePdfBtn">
+                                 SAVE AS PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+
+        function showResidentVerifyModal(residentName) {
+            let modal = document.getElementById('residentVerifyModal');
+            if (!modal) {
+                modal = createResidentVerifyModal();
+                document.body.appendChild(modal);
+            }
+            document.getElementById('verifyResidentName').textContent = residentName;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeResidentVerifyModal() {
+            const modal = document.getElementById('residentVerifyModal');
+            if (modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        function createResidentVerifyModal() {
+            const modal = document.createElement('div');
+            modal.id = 'residentVerifyModal';
+            modal.className = 'resident-verify-modal';
+            modal.innerHTML = `
+                <div class="verify-modal-content">
+                    <button class="close-modal" id="closeResidentModal" aria-label="Close">&times;</button>
+
+                    <div class="verify-modal-header">
+                        <h4>VERIFY RESIDENT PROFILE</h4>
+                    </div>
+
+                    <div class="verify-modal-body">
+                        <h5>I. Personal Information</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Family Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="USA" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Suffix:</label>
+                                <input type="text" class="form-control form-control-sm" value="JR" readonly>
+                            </div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Date of Birth:</label>
+                                <input type="text" class="form-control form-control-sm" value="08-10-2000" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Place of Birth:</label>
+                                <input type="text" class="form-control form-control-sm" value="MAYON (DIY)" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Sex:</label>
+                                <input type="text" class="form-control form-control-sm" value="MALE" readonly>
+                            </div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Civil Status:</label>
+                                <input type="text" class="form-control form-control-sm" value="MARRIED" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Spouse:</label>
+                                <input type="text" class="form-control form-control-sm" value="SCHENA LOUISE" readonly>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">II. Residency Details</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>House Number:</label>
+                                <input type="text" class="form-control form-control-sm" value="289" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Street:</label>
+                                <input type="text" class="form-control form-control-sm" value="SINIFOROSA STREET" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Purok:</label>
+                                <input type="text" class="form-control form-control-sm" value="3" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Residency Status:</label>
+                                <input type="text" class="form-control form-control-sm" value="RESIDING" readonly>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">III. Family and Household Details</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Father's Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="JANE" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="DOMADEN" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Relationship:</label>
+                                <input type="text" class="form-control form-control-sm" value="MOTHER" readonly>
+                            </div>
+                        </div>
+
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Mother's Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Middle Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Last Name:</label>
+                                <input type="text" class="form-control form-control-sm" value="" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>No. of Household:</label>
+                                <input type="text" class="form-control form-control-sm" value="19" readonly>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">IV. Employment Information</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Occupational Attainment:</label>
+                                <input type="text" class="form-control form-control-sm" value="SENIOR STUDENT" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Employment Status:</label>
+                                <input type="text" class="form-control form-control-sm" value="NOT EMPLOYED" readonly>
+                            </div>
+                        </div>
+
+                        <h5 class="mt-4">V. Contact Information</h5>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label>Mobile No:</label>
+                                <input type="text" class="form-control form-control-sm" value="09123456789" readonly>
+                            </div>
+                            <div class="info-item">
+                                <label>Telephone No:</label>
+                                <input type="text" class="form-control form-control-sm" value="(02) 1234 5678" readonly>
+                            </div>
+                        </div>
+
+                        <div class="verify-modal-footer">
+                            <button class="btn btn-primary" id="closeVerifyBtn">Close</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            return modal;
+        }
+    });
+</script>

@@ -29,12 +29,24 @@ body, html {
 }
 
 .date-bar {
-    background-color: #90ee90;
+    background: rgba(45, 80, 22, 0.95); /* dark green header strip to contrast white text */
     color: #ffffff;
     font-weight: 500;
     padding: 6px 0;
     font-size: 14px;
     border-bottom: 1px solid #1f7d1f;
+}
+
+.current-date {
+    color: #ffffff !important;
+    background: rgba(255,255,255,0.06);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+@media (max-width: 576px) {
+    .current-date { padding: 4px 8px; font-size: 12px; }
 }
 
 .login-container {
@@ -136,4 +148,152 @@ body, html {
     text-align: center;
     color: #777;
     font-size: 14px;
+}
+
+.docs-container {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.1);
+    margin: 20px auto;
+    max-width: 1200px;
+    overflow: hidden;
+}
+
+.nav-tabs {
+    background-color: #90ee90;
+    border-bottom: none;
+    padding: 0;
+}
+
+    .nav-tabs .nav-link {
+        color: #2d5016;
+        font-weight: 500;
+        border: none;
+        border-radius: 0;
+        padding: 15px 30px;
+        transition: all 0.3s ease;
+    }
+
+        .nav-tabs .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: transparent;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: #ffffff;
+            color: #2d5016;
+            border: none;
+            border-bottom: 3px solid #4F7942;
+        }
+
+.tab-content {
+    padding: 25px;
+}
+
+.search-container {
+    margin-bottom: 20px;
+}
+
+.search-input {
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    width: 300px;
+}
+
+    .search-input:focus {
+        outline: none;
+        border-color: #90ee90;
+        box-shadow: 0 0 0 0.2rem rgba(144, 238, 144, 0.25);
+    }
+
+.table-container {
+    overflow-x: auto;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.docs-table {
+    width: 100%;
+    background-color: #ffffff;
+    margin: 0;
+}
+
+    .docs-table thead {
+        background-color: #90ee90;
+    }
+
+        .docs-table thead th {
+            color: #2d5016;
+            font-weight: 600;
+            padding: 12px;
+            border: none;
+            font-size: 14px;
+            text-align: left;
+        }
+
+    .docs-table tbody td {
+        padding: 12px;
+        border-bottom: 1px solid #f0f0f0;
+        font-size: 14px;
+        vertical-align: middle;
+    }
+
+    .docs-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .docs-table tbody tr:last-child td {
+        border-bottom: none;
+    }
+
+.action-icons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+    .action-icons i {
+        cursor: pointer;
+        font-size: 18px;
+        transition: all 0.3s ease;
+    }
+
+    .action-icons .bi-eye {
+        color: #17a2b8;
+    }
+
+        .action-icons .bi-eye:hover {
+            color: #138496;
+        }
+
+    .action-icons .bi-check-circle {
+        color: #28a745;
+    }
+
+        .action-icons .bi-check-circle:hover {
+            color: #218838;
+        }
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-issued {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status-pending {
+    background-color: #fff3cd;
+    color: #856404;
+}
+
+.dept-admin {
+    color: #666;
+    font-size: 13px;
 }
