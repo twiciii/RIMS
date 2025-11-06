@@ -18,7 +18,7 @@ body, html {
 }
 
 .header-top {
-    background-color: #f5f2e9;
+    background-color: #f3e8c3 !important;
     border-bottom: 2px solid #a6d7a6;
 }
 
@@ -29,7 +29,7 @@ body, html {
 }
 
 .date-bar {
-    background: rgba(45, 80, 22, 0.95); /* dark green header strip to contrast white text */
+    background: #90ee90;
     color: #ffffff;
     font-weight: 500;
     padding: 6px 0;

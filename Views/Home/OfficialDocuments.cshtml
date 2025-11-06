@@ -71,7 +71,7 @@
                     </div>
                 </div>
 
- 
+
                 <div class="card border-0 shadow-sm">
                     <div class="card-body">
                         <h6 class="mb-3" style="font-size: 13px; color: #666;">Recently Added Residents</h6>
@@ -260,7 +260,7 @@
         </div>
     </div>
 </div>
-
+<script src="~/js/site.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
@@ -412,7 +412,7 @@
 
             if (e.target.classList.contains('bi-check-circle') && e.target.closest('#residentsTableBody')) {
                 const residentName = e.target.getAttribute('data-resident');
-                showResidentVerifyModal(residentName);
+                alert(`Verify resident: ${residentName}`);
             }
 
             if (e.target.closest && e.target.closest('#savePdfBtn')) {
@@ -420,19 +420,10 @@
                 saveDocumentAsPdf();
             }
 
-            if (e.target.id === 'closeVerifyBtn') {
-                closeResidentVerifyModal();
-            }
-
             if (e.target.id === 'closeModal' || e.target.id === 'documentModal') {
                 closeDocumentModal();
             }
-            if (e.target.id === 'closeResidentModal' || e.target.id === 'residentVerifyModal') {
-                closeResidentVerifyModal();
-            }
-        });
-
-
+			});
         function showDocumentModal(name, docType) {
             let modal = document.getElementById('documentModal');
             if (!modal) {
@@ -510,168 +501,6 @@
                             <button class="btn btn-success" type="button" id="savePdfBtn">
                                  SAVE AS PDF
                             </button>
-                        </div>
-                    </div>
-                </div>
-            `;
-            return modal;
-        }
-
-        function showResidentVerifyModal(residentName) {
-            let modal = document.getElementById('residentVerifyModal');
-            if (!modal) {
-                modal = createResidentVerifyModal();
-                document.body.appendChild(modal);
-            }
-            document.getElementById('verifyResidentName').textContent = residentName;
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeResidentVerifyModal() {
-            const modal = document.getElementById('residentVerifyModal');
-            if (modal) {
-                modal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-            }
-        }
-
-        function createResidentVerifyModal() {
-            const modal = document.createElement('div');
-            modal.id = 'residentVerifyModal';
-            modal.className = 'resident-verify-modal';
-            modal.innerHTML = `
-                <div class="verify-modal-content">
-                    <button class="close-modal" id="closeResidentModal" aria-label="Close">&times;</button>
-
-                    <div class="verify-modal-header">
-                        <h4>VERIFY RESIDENT PROFILE</h4>
-                    </div>
-
-                    <div class="verify-modal-body">
-                        <h5>I. Personal Information</h5>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Family Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="USA" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Last Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Suffix:</label>
-                                <input type="text" class="form-control form-control-sm" value="JR" readonly>
-                            </div>
-                        </div>
-
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Date of Birth:</label>
-                                <input type="text" class="form-control form-control-sm" value="08-10-2000" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Place of Birth:</label>
-                                <input type="text" class="form-control form-control-sm" value="MAYON (DIY)" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Sex:</label>
-                                <input type="text" class="form-control form-control-sm" value="MALE" readonly>
-                            </div>
-                        </div>
-
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Civil Status:</label>
-                                <input type="text" class="form-control form-control-sm" value="MARRIED" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Spouse:</label>
-                                <input type="text" class="form-control form-control-sm" value="SCHENA LOUISE" readonly>
-                            </div>
-                        </div>
-
-                        <h5 class="mt-4">II. Residency Details</h5>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>House Number:</label>
-                                <input type="text" class="form-control form-control-sm" value="289" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Street:</label>
-                                <input type="text" class="form-control form-control-sm" value="SINIFOROSA STREET" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Purok:</label>
-                                <input type="text" class="form-control form-control-sm" value="3" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Residency Status:</label>
-                                <input type="text" class="form-control form-control-sm" value="RESIDING" readonly>
-                            </div>
-                        </div>
-
-                        <h5 class="mt-4">III. Family and Household Details</h5>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Father's Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="JANE" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Last Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="DOMADEN" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Relationship:</label>
-                                <input type="text" class="form-control form-control-sm" value="MOTHER" readonly>
-                            </div>
-                        </div>
-
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Mother's Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Middle Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Last Name:</label>
-                                <input type="text" class="form-control form-control-sm" value="" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>No. of Household:</label>
-                                <input type="text" class="form-control form-control-sm" value="19" readonly>
-                            </div>
-                        </div>
-
-                        <h5 class="mt-4">IV. Employment Information</h5>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Occupational Attainment:</label>
-                                <input type="text" class="form-control form-control-sm" value="SENIOR STUDENT" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Employment Status:</label>
-                                <input type="text" class="form-control form-control-sm" value="NOT EMPLOYED" readonly>
-                            </div>
-                        </div>
-
-                        <h5 class="mt-4">V. Contact Information</h5>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <label>Mobile No:</label>
-                                <input type="text" class="form-control form-control-sm" value="09123456789" readonly>
-                            </div>
-                            <div class="info-item">
-                                <label>Telephone No:</label>
-                                <input type="text" class="form-control form-control-sm" value="(02) 1234 5678" readonly>
-                            </div>
-                        </div>
-
-                        <div class="verify-modal-footer">
-                            <button class="btn btn-primary" id="closeVerifyBtn">Close</button>
                         </div>
                     </div>
                 </div>
