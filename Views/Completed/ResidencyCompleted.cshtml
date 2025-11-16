@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Certificate of Residency";
+}
+
+<div class="certificate-container">
+    <div class="certificate">
+        <div class="certificate-header">
+            <div class="barangay-seal">
+                <div class="seal-circle">
+                    <span>SB</span>
+                </div>
+            </div>
+            <div class="barangay-info">
+                <h1>BARANGAY SAN BARTOLOME</h1>
+                <p>Quezon City, Philippines</p>
+                <p>www.barangaysanbartolome.gov.ph</p>
+            </div>
+            <div class="office-info">
+                <p>Office of the Barangay Captain</p>
+            </div>
+        </div>
+
+        <div class="certificate-title">
+            <h2>CERTIFICATE OF RESIDENCY</h2>
+        </div>
+
+        <div class="certificate-body">
+            <div class="to-whom-it-may-concern">
+                <p><strong>TO WHOM IT MAY CONCERN:</strong></p>
+            </div>
+
+            <div class="certificate-content">
+                <p>
+                    This is to certify that <strong>JUAN DELA CRUZ</strong>, of legal age, married,
+                    Filipino citizen and whose signature appears below is a resident of
+                    <strong>BLOCK LOT 2, SAMPAGUITA STREET, BARANGAY SAN BARTOLOME, QUEZON CITY</strong>.
+                </p>
+
+                <p>
+                    Based on the records of this office, he/she has been residing at Barangay San Bartolome,
+                    Quezon City for the past five (5) years.
+                </p>
+
+                <p>
+                    This certification is being issued upon the request of the above-named person
+                    for <strong>SCHOOL REQUIREMENTS</strong> and for whatever legal purposes it may serve.
+                </p>
+            </div>
+
+            <div class="certificate-footer">
+                <div class="issued-date">
+                    <p>Issued this <strong>28th day of September 2025</strong> at Barangay San Bartolome, Quezon City.</p>
+                </div>
+
+                <div class="signature-section">
+                    <div class="signature-area">
+                        <div class="signature-line"></div>
+                        <p class="signature-label">Barangay Captain</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="certificate-actions">
+        <button onclick="window.print()" class="btn-print">Print Certificate</button>
+        <a href="@Url.Action("Index", "Home")" class="btn-home">Back to Home</a>
+        <a href="@Url.Action("Residency", "Certificates")" class="btn-new">New Application</a>
+    </div>
+</div>

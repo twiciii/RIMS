@@ -1,0 +1,74 @@
+﻿@{
+    ViewData["Title"] = "Capture Photo for ID";
+}
+
+<div class="capture-container">
+    <div class="capture-header">
+        <h1>BARANGAY ID PHOTO CAPTURE</h1>
+        <p>Position your face within the frame for your ID photo</p>
+    </div>
+
+    <div class="capture-content">
+        <div class="camera-section">
+            <div class="camera-frame">
+                <div class="face-guide">
+                    <div class="guide-circle"></div>
+                    <div class="guide-text">Align face here</div>
+                </div>
+                <video id="videoElement" autoplay playsinline></video>
+                <canvas id="canvasElement" style="display: none;"></canvas>
+            </div>
+
+            <div class="camera-controls">
+                <button id="captureBtn" class="btn-capture">
+                    <span class="camera-icon">📸</span>
+                    Capture Photo
+                </button>
+                <button id="retakeBtn" class="btn-retake" style="display: none;">
+                    <span class="retake-icon">🔄</span>
+                    Retake Photo
+                </button>
+            </div>
+        </div>
+
+        <div class="preview-section" id="previewSection" style="display: none;">
+            <h3>Photo Preview</h3>
+            <div class="photo-preview">
+                <img id="photoPreview" src="" alt="Captured Photo">
+            </div>
+            <div class="preview-actions">
+                <button id="confirmPhoto" class="btn-confirm">Use This Photo</button>
+                <button id="retakePhoto" class="btn-retake">Take Another</button>
+            </div>
+        </div>
+
+        <div class="instructions">
+            <h4>Photo Guidelines:</h4>
+            <ul>
+                <li>✅ Face the camera directly with a neutral expression</li>
+                <li>✅ Ensure good lighting on your face</li>
+                <li>✅ Remove glasses and hats</li>
+                <li>✅ Keep background plain and light-colored</li>
+                <li>❌ No filters or edited photos</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="capture-actions">
+        <a href="@Url.Action("Application", "ID")" class="btn-back">← Back to Application</a>
+        <button id="continueBtn" class="btn-continue" disabled>Continue to Printing →</button>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/Scripts/camera.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCamera();
+
+            document.getElementById('continueBtn').addEventListener('click', function() {
+                window.location.href = '@Url.Action("Printing", "ID")';
+            });
+        });
+    </script>
+}

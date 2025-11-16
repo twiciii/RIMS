@@ -4,20 +4,35 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="C:\RIMS\Index.cshtml" Link="Index.cshtml" />
-    <Content Include="C:\RIMS\Register.cshtml" Link="Register.cshtml" />
-    <Content Include="C:\RIMS\Resetpassword.cshtml" Link="Resetpassword.cshtml" />
-    <Content Include="C:\RIMS\site.css" Link="site.css" />
-    <Content Include="C:\RIMS\site.js" Link="site.js" />
-    <Content Include="C:\RIMS\TermsandCondition.cshtml" Link="TermsandCondition.cshtml" />
-    <Content Include="C:\RIMS\_Layout.cshtml" Link="_Layout.cshtml" />
+    <None Include="tools\MatchFileClassNames\MatchFileClassNames.csproj" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.3.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.3.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
+    <PackageReference Include="QuestPDF" Version="2025.7.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.0" />
+    <PackageReference Include="Verify.QuestPDF" Version="2.3.0" />
+  </ItemGroup>
+
+  <!-- Exclude backup/fix files from compilation to avoid duplicate types -->
+  <ItemGroup>
+    <Compile Remove="tools\backups\**\*.cs" />
+    <None Remove="tools\backups\**\*" />
   </ItemGroup>
 
 </Project>

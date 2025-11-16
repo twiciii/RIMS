@@ -1,0 +1,180 @@
+﻿@{
+    ViewData["Title"] = "Barangay ID Application";
+}
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>APPLICATION FORM FOR BARANGAY ID</h1>
+        <div class="form-subtitle">
+            <p>Barangay San Bartolome, Quezon City</p>
+            <div class="form-date" id="formDate"></div>
+        </div>
+    </div>
+
+    @using (Html.BeginForm("ProcessApplication", "ID", FormMethod.Post, new { @class = "id-application-form", id = "idForm" }))
+    {
+        <div class="form-section">
+            <h2>I. Personal Information</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>First Name *</label>
+                    <input type="text" name="FirstName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Middle Name</label>
+                    <input type="text" name="MiddleName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Last Name *</label>
+                    <input type="text" name="LastName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Suffix</label>
+                    <select name="Suffix" class="form-control">
+                        <option value="">None</option>
+                        <option value="Jr">Jr</option>
+                        <option value="Sr">Sr</option>
+                        <option value="II">II</option>
+                        <option value="III">III</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth *</label>
+                    <input type="date" name="DateOfBirth" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Place of Birth *</label>
+                    <input type="text" name="PlaceOfBirth" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Contact No. *</label>
+                    <input type="tel" name="ContactNo" class="form-control" placeholder="0912-345-6789" required />
+                </div>
+                <div class="form-group">
+                    <label>Sex *</label>
+                    <select name="Sex" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Civil Status *</label>
+                    <select name="CivilStatus" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="Single">Single</option>
+                        <option value="Married">Married</option>
+                        <option value="Widowed">Widowed</option>
+                        <option value="Separated">Separated</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>II. Residency Details</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>House No. *</label>
+                    <input type="text" name="HouseNo" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Street Name *</label>
+                    <input type="text" name="StreetName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Purok *</label>
+                    <input type="text" name="Purok" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Years of Residence *</label>
+                    <input type="number" name="YearsOfResidence" class="form-control" min="1" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>III. Emergency Contact Details</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>Emergency Contact Name *</label>
+                    <input type="text" name="EmergencyName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Emergency Contact Number *</label>
+                    <input type="tel" name="EmergencyContact" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Relationship *</label>
+                    <input type="text" name="EmergencyRelationship" class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>IV. ID Photo Capture</h2>
+            <div class="photo-section">
+                <div class="photo-placeholder" id="photoPlaceholder">
+                    <div class="photo-instructions">
+                        <span class="photo-icon">📸</span>
+                        <p>Photo will be captured in the next step</p>
+                        <small>Click "Proceed to Photo Capture" to take your ID photo</small>
+                    </div>
+                </div>
+                <div class="photo-actions">
+                    <button type="button" id="capturePhotoBtn" class="btn-capture">
+                        Proceed to Photo Capture →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-process" id="submitBtn" disabled>
+                Submit Application
+            </button>
+            <p class="form-note">
+                Note: You need to complete the photo capture before submitting the application.
+            </p>
+        </div>
+    }
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const captureBtn = document.getElementById('capturePhotoBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const photoPlaceholder = document.getElementById('photoPlaceholder');
+
+            captureBtn.addEventListener('click', function() {
+                // Store form data temporarily
+                const formData = new FormData(document.getElementById('idForm'));
+                sessionStorage.setItem('idFormData', JSON.stringify(Object.fromEntries(formData)));
+
+                // Redirect to photo capture
+                window.location.href = '@Url.Action("Capture", "ID")';
+            });
+
+            // Check if photo was captured
+            const capturedPhoto = sessionStorage.getItem('capturedPhoto');
+            if (capturedPhoto) {
+                photoPlaceholder.innerHTML = `
+                    <div class="photo-preview">
+                        <img src="${capturedPhoto}" alt="Captured Photo">
+                        <div class="photo-status">✅ Photo Captured</div>
+                    </div>
+                `;
+                submitBtn.disabled = false;
+                captureBtn.textContent = 'Retake Photo';
+            }
+
+            // Update current date
+            document.getElementById('formDate').textContent = new Date().toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+        });
+    </script>
+}

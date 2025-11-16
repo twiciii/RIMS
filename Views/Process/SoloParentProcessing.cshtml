@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Processing Solo Parent Certificate";
+}
+
+<div class="processing-container">
+    <div class="processing-content">
+        <div class="processing-icon">⏳</div>
+        <h1>YOUR DOCUMENT IS NOW BEING PROCESSED</h1>
+        <p>Solo Parent Certificate - Please wait while we process your request...</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div class="processing-details">
+            <p><strong>Document Type:</strong> Solo Parent Certificate</p>
+            <p><strong>Timestamp:</strong> <span id="processingTime"></span></p>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.getElementById('processingTime').textContent = new Date().toLocaleString();
+
+        setTimeout(function() {
+            window.location.href = '@Url.Action("SoloParentCompleted", "Completed")';
+        }, 3000);
+    </script>
+}

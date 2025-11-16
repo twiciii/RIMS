@@ -1,0 +1,81 @@
+﻿@{
+    ViewData["Title"] = "Solo Parent Certificate";
+}
+
+<div class="form-container">
+    <div class="form-header">
+        <h1>CERTIFICATE OF SOLO PARENT FORM</h1>
+        <div class="form-date" id="formDate"></div>
+    </div>
+
+    @using (Html.BeginForm("ProcessSoloParent", "Certificates", FormMethod.Post, new { @class = "certificate-form" }))
+    {
+        <div class="form-section">
+            <h2>I. Personal Information</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>First Name</label>
+                    <input type="text" name="FirstName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Middle Name</label>
+                    <input type="text" name="MiddleName" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Last Name</label>
+                    <input type="text" name="LastName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Suffix</label>
+                    <input type="text" name="Suffix" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label>Date of Birth</label>
+                    <input type="date" name="DateOfBirth" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Place of Birth</label>
+                    <input type="text" name="PlaceOfBirth" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Contact No.</label>
+                    <input type="tel" name="ContactNo" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Sex</label>
+                    <select name="Sex" class="form-control" required>
+                        <option value="">Select</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <h2>II. Residency Details</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>House No.</label>
+                    <input type="text" name="HouseNo" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Street Name</label>
+                    <input type="text" name="StreetName" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Purok</label>
+                    <input type="text" name="Purok" class="form-control" required />
+                </div>
+                <div class="form-group">
+                    <label>Purpose of the Certificate</label>
+                    <input type="text" name="Purpose" class="form-control" required />
+                </div>
+            </div>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-process">Process Now</button>
+        </div>
+    }
+</div>

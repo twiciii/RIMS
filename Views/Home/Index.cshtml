@@ -53,10 +53,42 @@
 
         <button type="submit" class="btn btn-success w-100">LOG IN</button>
         <p class="text-center mt-3">
-            Don’t have an account?
+            Don't have an account?
             <a asp-controller="Home" asp-action="Register" style="color:#0E4732;">Sign Up</a>
         </p>
     </form>
+</div>
+
+<div class="dashboard">
+    <div class="container">
+        <h2>Available Services</h2>
+        <div class="services-grid">
+            <div class="service-card" onclick="location.href='@Url.Action("Residency", "Certificates")'">
+                <h3>Certificate of Residency</h3>
+                <p>Request residency certification</p>
+            </div>
+            <div class="service-card" onclick="location.href='@Url.Action("Indigency", "Certificates")'">
+                <h3>Certificate of Indigency</h3>
+                <p>Request indigency certification</p>
+            </div>
+            <div class="service-card" onclick="location.href='@Url.Action("GoodMoral", "Certificates")'">
+                <h3>Good Moral Character</h3>
+                <p>Request good moral certification</p>
+            </div>
+            <div class="service-card" onclick="location.href='@Url.Action("SoloParent", "Certificates")'">
+                <h3>Solo Parent Certificate</h3>
+                <p>Request solo parent certification</p>
+            </div>
+            <div class="service-card" onclick="location.href='@Url.Action("Clearance", "Certificates")'">
+                <h3>Barangay Clearance</h3>
+                <p>Request barangay clearance</p>
+            </div>
+            <div class="service-card" onclick="location.href='@Url.Action("Application", "ID")'">
+                <h3>Barangay ID</h3>
+                <p>Apply for barangay ID</p>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

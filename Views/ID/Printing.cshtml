@@ -1,0 +1,169 @@
+﻿@{
+    ViewData["Title"] = "Printing Barangay ID";
+}
+
+<div class="printing-container">
+    <div class="printing-header">
+        <h1>BARANGAY ID PRINTING PROCESS</h1>
+        <p>Your ID is now being prepared and printed</p>
+    </div>
+
+    <div class="printing-content">
+        <div class="process-steps">
+            <div class="step active" id="step1">
+                <div class="step-number">1</div>
+                <div class="step-info">
+                    <h3>Data Encoding</h3>
+                    <p>Processing your information...</p>
+                </div>
+                <div class="step-status">
+                    <span class="status-icon">⏳</span>
+                </div>
+            </div>
+
+            <div class="step" id="step2">
+                <div class="step-number">2</div>
+                <div class="step-info">
+                    <h3>ID Template Generation</h3>
+                    <p>Creating your ID layout...</p>
+                </div>
+                <div class="step-status">
+                    <span class="status-icon">⏳</span>
+                </div>
+            </div>
+
+            <div class="step" id="step3">
+                <div class="step-number">3</div>
+                <div class="step-info">
+                    <h3>Photo Integration</h3>
+                    <p>Adding your photo to ID...</p>
+                </div>
+                <div class="step-status">
+                    <span class="status-icon">⏳</span>
+                </div>
+            </div>
+
+            <div class="step" id="step4">
+                <div class="step-number">4</div>
+                <div class="step-info">
+                    <h3>Quality Verification</h3>
+                    <p>Checking print quality...</p>
+                </div>
+                <div class="step-status">
+                    <span class="status-icon">⏳</span>
+                </div>
+            </div>
+
+            <div class="step" id="step5">
+                <div class="step-number">5</div>
+                <div class="step-info">
+                    <h3>Lamination</h3>
+                    <p>Applying protective coating...</p>
+                </div>
+                <div class="step-status">
+                    <span class="status-icon">⏳</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="printing-animation">
+            <div class="printer-machine">
+                <div class="printer-body">
+                    <div class="printer-top"></div>
+                    <div class="printer-paper">
+                        <div class="paper-sheet" id="paperSheet">
+                            <div class="id-preview">
+                                <div class="id-photo-placeholder"></div>
+                                <div class="id-details">
+                                    <div class="id-name">JUAN DELA CRUZ</div>
+                                    <div class="id-address">Block 2, Sampaguita Street</div>
+                                    <div class="id-number">BID-2025-001234</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="printer-output"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-text">
+                <span id="progressPercentage">0%</span>
+                <span id="progressStatus">Initializing printing process...</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="printing-actions">
+        <div class="status-message" id="statusMessage">
+            Please wait while we complete your Barangay ID...
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            startPrintingProcess();
+        });
+
+        function startPrintingProcess() {
+            const steps = document.querySelectorAll('.step');
+            const progressFill = document.getElementById('progressFill');
+            const progressPercentage = document.getElementById('progressPercentage');
+            const progressStatus = document.getElementById('progressStatus');
+            const paperSheet = document.getElementById('paperSheet');
+            const statusMessage = document.getElementById('statusMessage');
+
+            let currentStep = 0;
+            const totalSteps = steps.length;
+            const stepDuration = 2000; // 2 seconds per step
+
+            function updateProgress(step, percentage, status) {
+                steps[step].classList.add('completed');
+                steps[step].classList.remove('active');
+
+                if (step < totalSteps - 1) {
+                    steps[step + 1].classList.add('active');
+                }
+
+                progressFill.style.width = percentage + '%';
+                progressPercentage.textContent = percentage + '%';
+                progressStatus.textContent = status;
+
+                // Animate paper movement
+                if (step >= 2) {
+                    paperSheet.style.transform = `translateY(${(step - 1) * 20}px)`;
+                }
+            }
+
+            // Simulate printing process
+            const processSteps = [
+                { delay: 1000, percentage: 20, status: "Encoding personal data..." },
+                { delay: 2000, percentage: 40, status: "Generating ID template..." },
+                { delay: 3000, percentage: 60, status: "Integrating photo..." },
+                { delay: 4000, percentage: 80, status: "Verifying print quality..." },
+                { delay: 5000, percentage: 100, status: "Applying lamination..." }
+            ];
+
+            processSteps.forEach((step, index) => {
+                setTimeout(() => {
+                    updateProgress(index, step.percentage, step.status);
+
+                    if (index === processSteps.length - 1) {
+                        setTimeout(() => {
+                            statusMessage.innerHTML = '✅ <strong>Printing Complete!</strong> Your Barangay ID is ready.';
+                            setTimeout(() => {
+                                window.location.href = '@Url.Action("Ready", "ID")';
+                            }, 1500);
+                        }, 1000);
+                    }
+                }, step.delay);
+            });
+        }
+    </script>
+}

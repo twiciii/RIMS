@@ -1,0 +1,178 @@
+﻿@{
+    ViewData["Title"] = "Barangay ID Ready";
+}
+
+<div class="ready-container">
+    <div class="ready-header">
+        <div class="success-icon">🎉</div>
+        <h1>YOUR BARANGAY ID IS NOW READY!</h1>
+        <p class="success-message">Congratulations! Your Barangay ID has been successfully processed and printed.</p>
+    </div>
+
+    <div class="id-preview-card">
+        <div class="id-card">
+            <div class="id-header">
+                <div class="barangay-seal">
+                    <div class="seal">
+                        <span>SB</span>
+                    </div>
+                </div>
+                <div class="id-title">
+                    <h2>BARANGAY ID</h2>
+                    <p>San Bartolome, Quezon City</p>
+                </div>
+            </div>
+
+            <div class="id-body">
+                <div class="id-photo">
+                    <img id="capturedPhoto" src="~/Content/placeholder-photo.jpg" alt="ID Photo">
+                    <div class="id-number">BID-2025-001234</div>
+                </div>
+
+                <div class="id-details">
+                    <div class="detail-row">
+                        <label>Full Name:</label>
+                        <span class="detail-value">JUAN DELA CRUZ</span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Address:</label>
+                        <span class="detail-value">Block 2, Sampaguita Street, Barangay San Bartolome</span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Birth Date:</label>
+                        <span class="detail-value">January 15, 1985</span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Civil Status:</label>
+                        <span class="detail-value">Married</span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Date Issued:</label>
+                        <span class="detail-value">@DateTime.Now.ToString("MMMM dd, yyyy")</span>
+                    </div>
+                    <div class="detail-row">
+                        <label>Valid Until:</label>
+                        <span class="detail-value">@DateTime.Now.AddYears(3).ToString("MMMM dd, yyyy")</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="id-footer">
+                <div class="signature-area">
+                    <div class="signature-line"></div>
+                    <p class="signature-label">Barangay Captain</p>
+                </div>
+                <div class="emergency-contact">
+                    <small>Emergency Contact: 0912-345-6789</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="completion-actions">
+        <div class="action-buttons">
+            <button onclick="printID()" class="btn-print">
+                <span class="btn-icon">🖨️</span>
+                Print ID Copy
+            </button>
+            <button onclick="saveDigitalID()" class="btn-save">
+                <span class="btn-icon">💾</span>
+                Save Digital Copy
+            </button>
+            <a href="@Url.Action("Application", "ID")" class="btn-new">
+                <span class="btn-icon">🆕</span>
+                New Application
+            </a>
+        </div>
+
+        <div class="back-home">
+            <a href="@Url.Action("Index", "Home")" class="btn-home">
+                ← Back to Home
+            </a>
+        </div>
+    </div>
+
+    <div class="next-steps">
+        <h3>What to do next:</h3>
+        <div class="steps-grid">
+            <div class="step-item">
+                <div class="step-icon">🛡️</div>
+                <h4>Keep Your ID Safe</h4>
+                <p>Store your Barangay ID in a secure place. Do not laminate as it's already laminated.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-icon">📋</div>
+                <h4>Use for Transactions</h4>
+                <p>Present this ID for barangay transactions, government services, and local requirements.</p>
+            </div>
+            <div class="step-item">
+                <div class="step-icon">🔄</div>
+                <h4>Renewal Reminder</h4>
+                <p>Your ID is valid for 3 years. Renew before the expiration date.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function printID() {
+            // Show print dialog for ID card
+            const printContent = document.querySelector('.id-card').cloneNode(true);
+            const printWindow = window.open('', '_blank');
+
+            printWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Print Barangay ID</title>
+                    <style>
+                        body {
+                            font-family: Arial, sans-serif;
+                            margin: 0;
+                            padding: 20px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            min-height: 100vh;
+                        }
+                        .id-card {
+                            border: 2px solid #1e3c72;
+                            padding: 20px;
+                            max-width: 400px;
+                            background: white;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${printContent.outerHTML}
+                </body>
+                </html>
+            `);
+
+            printWindow.document.close();
+            printWindow.focus();
+            printWindow.print();
+            printWindow.close();
+        }
+
+        function saveDigitalID() {
+            // Simulate saving digital copy
+            alert('Digital ID copy saved to your device!');
+
+            // In real implementation, this would generate a PDF or download file
+            const link = document.createElement('a');
+            link.href = '#';
+            link.download = 'Barangay-ID-Juan-Dela-Cruz.pdf';
+            link.click();
+        }
+
+        // Load captured photo from session storage
+        document.addEventListener('DOMContentLoaded', function() {
+            const capturedPhoto = sessionStorage.getItem('capturedPhoto');
+            if (capturedPhoto) {
+                document.getElementById('capturedPhoto').src = capturedPhoto;
+            }
+        });
+    </script>
+}

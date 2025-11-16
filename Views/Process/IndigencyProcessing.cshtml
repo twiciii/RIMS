@@ -1,0 +1,28 @@
+﻿@{
+    ViewData["Title"] = "Processing Indigency Certificate";
+}
+
+<div class="processing-container">
+    <div class="processing-content">
+        <div class="processing-icon">⏳</div>
+        <h1>YOUR DOCUMENT IS NOW BEING PROCESSED</h1>
+        <p>Certificate of Indigency - Please wait while we process your request...</p>
+        <div class="loading-bar">
+            <div class="loading-progress"></div>
+        </div>
+        <div class="processing-details">
+            <p><strong>Document Type:</strong> Certificate of Indigency</p>
+            <p><strong>Timestamp:</strong> <span id="processingTime"></span></p>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        document.getElementById('processingTime').textContent = new Date().toLocaleString();
+
+        setTimeout(function() {
+            window.location.href = '@Url.Action("IndigencyCompleted", "Completed")';
+        }, 3000);
+    </script>
+}
